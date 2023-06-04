@@ -1,6 +1,7 @@
 package de.workshops.bookshelf.book;
 
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
 import lombok.RequiredArgsConstructor;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -22,7 +23,7 @@ public class BookRestController {
     }
 
     @GetMapping("/{isbn}")
-    public Book getSingleBook(@PathVariable @NotBlank String isbn) {
+    public Book getSingleBook(@PathVariable @NotBlank @Size(min = 10) String isbn) {
         return bookService.getSingleBook(isbn);
     }
 }
