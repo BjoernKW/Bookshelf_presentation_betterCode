@@ -26,4 +26,18 @@ public class BookRestController {
     public Book getSingleBook(@PathVariable @NotBlank @Size(min = 10) String isbn) {
         return bookService.getSingleBook(isbn);
     }
+
+    // Uncomment this method to see the effect of the @ExceptionHandler annotation
+    // in conjunction with theProblemDetail annotation.
+    /*
+    @ExceptionHandler(ConstraintViolationException.class)
+    public ProblemDetail error(ConstraintViolationException ex) {
+        ProblemDetail problemDetail = ProblemDetail.forStatusAndDetail(HttpStatus.BAD_REQUEST, ex.getMessage());
+        problemDetail.setTitle("Invalid input");
+        problemDetail.setType(URI.create("http://localhost:8080/constraint_violation_exception.html"));
+        problemDetail.setProperty("timestamp", Instant.now());
+
+        return problemDetail;
+    }
+    */
 }
