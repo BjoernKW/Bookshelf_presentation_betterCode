@@ -34,7 +34,7 @@ public class BookRestController {
     public ProblemDetail error(ConstraintViolationException ex) {
         ProblemDetail problemDetail = ProblemDetail.forStatusAndDetail(HttpStatus.BAD_REQUEST, ex.getMessage());
         problemDetail.setTitle("Invalid input");
-        problemDetail.setType(URI.create("http://localhost:8080/constraint_violation_exception.html"));
+        problemDetail.setType(URI.create("/constraint_violation_exception.html"));
         problemDetail.setProperty("timestamp", Instant.now());
 
         return problemDetail;
