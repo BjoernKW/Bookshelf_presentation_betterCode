@@ -1,11 +1,16 @@
 package de.workshops.bookshelf.book;
 
+import jakarta.validation.ConstraintViolationException;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ProblemDetail;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import java.net.URI;
+import java.time.Instant;
 import java.util.List;
 
 @RestController
@@ -27,17 +32,13 @@ public class BookRestController {
         return bookService.getSingleBook(isbn);
     }
 
-    // Uncomment this method to see the effect of the @ExceptionHandler annotation
-    // in conjunction with theProblemDetail annotation.
-    /*
     @ExceptionHandler(ConstraintViolationException.class)
     public ProblemDetail error(ConstraintViolationException ex) {
         ProblemDetail problemDetail = ProblemDetail.forStatusAndDetail(HttpStatus.BAD_REQUEST, ex.getMessage());
         problemDetail.setTitle("Invalid input");
-        problemDetail.setType(URI.create("http://localhost:8080/constraint_violation_exception.html"));
+        problemDetail.setType(URI.create("/constraint_violation_exception.html"));
         problemDetail.setProperty("timestamp", Instant.now());
 
         return problemDetail;
     }
-    */
 }
